@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Nueva venta - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>Nueva venta</h2>
+    <a th:href="@{/ventas}">Volver</a>
+
+    <form method="post" th:action="@{/ventas/guardar}" th:object="${venta}">
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required/>
+        </div>
+        <div>
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" name="cliente.idCliente">
+                <option value="">-- Seleccione --</option>
+                <option th:each="c : ${clientes}"
+                        th:value="${c.idCliente}"
+                        th:text="${c.nombre}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="empleado">Empleado:</label>
+            <select id="empleado" name="empleado.idEmpleado">
+                <option value="">-- Seleccione --</option>
+                <option th:each="e : ${empleados}"
+                        th:value="${e.idEmpleado}"
+                        th:text="${e.nombre}">
+                </option>
+            </select>
+        </div>
+
+        <hr/>
+        <h3>Detalles de venta</h3>
+        <table border="1" id="detallesTable">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="detalles[0].producto.idProducto">
+                            <option value="">-- Seleccione --</option>
+                            <option th:each="p : ${productos}"
+                                    th:value="${p.idProducto}"
+                                    th:text="${p.nombre}">
+                            </option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="detalles[0].cantidad" value="1" min="1"/></td>
+                    <td><input type="number" name="detalles[0].precio" step="0.01" required/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="submit">Guardar venta</button>
+        <a th:href="@{/ventas}">Cancelar</a>
+    </form>
+
+</body>
+</html>

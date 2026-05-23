@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Categorias - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>
+        <span th:text="${categoria.idCategoria == null} ? 'Nueva categoria' : 'Editar categoria'"></span>
+    </h2>
+
+    <a th:href="@{/categorias}">Volver</a>
+
+    <form method="post" th:action="@{/categorias/guardar}" th:object="${categoria}">
+        <input type="hidden" name="idCategoria" th:value="*{idCategoria}"/>
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" th:value="*{nombre}" required/>
+        </div>
+        <button type="submit">Guardar</button>
+        <a th:href="@{/categorias}">Cancelar</a>
+    </form>
+
+</body>
+</html>

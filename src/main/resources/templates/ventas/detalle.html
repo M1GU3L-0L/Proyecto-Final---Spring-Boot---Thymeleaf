@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Venta #' + ${venta.idVenta} + ' - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>Venta #<span th:text="${venta.idVenta}"></span></h2>
+    <a th:href="@{/ventas}">Volver</a>
+
+    <p><strong>Fecha:</strong> <span th:text="${venta.fecha}"></span></p>
+    <p><strong>Cliente:</strong> <span th:text="${venta.cliente?.nombre}"></span></p>
+    <p><strong>Empleado:</strong> <span th:text="${venta.empleado?.nombre}"></span></p>
+
+    <h3>Detalle de productos</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="d : ${venta.detalles}">
+                <td th:text="${d.producto?.nombre}">Producto</td>
+                <td th:text="${d.cantidad}">1</td>
+                <td th:text="'$' + ${d.precio}">$0.00</td>
+                <td th:text="'$' + ${d.cantidad * d.precio}">$0.00</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(venta.detalles)}">
+                <td colspan="4">Sin detalles</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

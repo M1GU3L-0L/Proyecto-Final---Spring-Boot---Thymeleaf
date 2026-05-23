@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Empleados - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>
+        <span th:text="${empleado.idEmpleado == null} ? 'Nuevo empleado' : 'Editar empleado'"></span>
+    </h2>
+
+    <a th:href="@{/empleados}">Volver</a>
+
+    <form method="post" th:action="@{/empleados/guardar}" th:object="${empleado}">
+        <input type="hidden" name="idEmpleado" th:value="*{idEmpleado}"/>
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" th:value="*{nombre}" required/>
+        </div>
+        <div>
+            <label for="posicion">Posicion:</label>
+            <input type="text" id="posicion" name="posicion" th:value="*{posicion}"/>
+        </div>
+        <div>
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" th:value="*{username}" required/>
+        </div>
+        <div>
+            <label for="password">Contraseña <span th:if="${empleado.idEmpleado != null}">(dejar vacio para mantener)</span>:</label>
+            <input type="password" id="password" name="password"/>
+        </div>
+        <div>
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol">
+                <option value="EMPLEADO" th:selected="${empleado.rol == 'EMPLEADO'}">EMPLEADO</option>
+                <option value="ADMIN" th:selected="${empleado.rol == 'ADMIN'}">ADMIN</option>
+            </select>
+        </div>
+        <button type="submit">Guardar</button>
+        <a th:href="@{/empleados}">Cancelar</a>
+    </form>
+
+</body>
+</html>

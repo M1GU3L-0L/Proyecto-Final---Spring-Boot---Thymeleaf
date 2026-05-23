@@ -55,6 +55,6 @@ public class VentaService {
     }
 
     public @Nullable Object update(Integer id, Venta venta) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        throw new UnsupportedOperationException("Metodo 'update' no implementado");
     }
 }

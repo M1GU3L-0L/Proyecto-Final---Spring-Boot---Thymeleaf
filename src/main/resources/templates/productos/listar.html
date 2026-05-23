@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Productos - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>Productos</h2>
+    <a th:href="@{/productos/nuevo}">+ Nuevo producto</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Existencias</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${productos}">
+                <td th:text="${p.idProducto}">1</td>
+                <td th:text="${p.nombre}">Producto</td>
+                <td th:text="'$' + ${p.precio}">$0.00</td>
+                <td th:text="${p.existencias}">0</td>
+                <td th:text="${p.categoria?.nombre}">Categoria</td>
+                <td>
+                    <a th:href="@{/productos/editar/{id}(id=${p.idProducto})}">Editar</a>
+                    <a th:href="@{/productos/eliminar/{id}(id=${p.idProducto})}"
+                       onclick="return confirm('¿Eliminar?')">Eliminar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(productos)}">
+                <td colspan="6">No hay productos registrados</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

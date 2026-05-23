@@ -21,7 +21,7 @@ public class CategoriaService {
 
     public Categoria findById(Integer id) {
         return repo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Categoría no encontrada: " + id));
+            .orElseThrow(() -> new RuntimeException("Categoria no encontrada: " + id));
     }
 
     public Categoria save(Categoria categoria) {

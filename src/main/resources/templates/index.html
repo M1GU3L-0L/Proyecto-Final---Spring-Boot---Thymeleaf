@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Inicio - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>Panel principal - Veterinaria</h2>
+
+    <ul>
+        <li><a th:href="@{/productos}">Gestionar Productos</a></li>
+        <li><a th:href="@{/categorias}">Gestionar Categorias</a></li>
+        <li><a th:href="@{/clientes}">Gestionar Clientes</a></li>
+        <li><a th:href="@{/empleados}">Gestionar Empleados</a></li>
+        <li><a th:href="@{/proveedores}">Gestionar Proveedores</a></li>
+        <li><a th:href="@{/ventas}">Gestionar Ventas</a></li>
+    </ul>
+
+</body>
+</html>

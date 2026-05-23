@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Categorias - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>Categorias</h2>
+    <a th:href="@{/categorias/nuevo}">+ Nueva categoria</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${categorias}">
+                <td th:text="${c.idCategoria}">1</td>
+                <td th:text="${c.nombre}">Categoria</td>
+                <td>
+                    <a th:href="@{/categorias/editar/{id}(id=${c.idCategoria})}">Editar</a>
+                    <a th:href="@{/categorias/eliminar/{id}(id=${c.idCategoria})}"
+                       onclick="return confirm('¿Eliminar?')">Eliminar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(categorias)}">
+                <td colspan="3">No hay categorias registradas</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

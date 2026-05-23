@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Ventas - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>Ventas</h2>
+    <a th:href="@{/ventas/nuevo}">+ Nueva venta</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Empleado</th>
+                <th>Productos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="v : ${ventas}">
+                <td th:text="${v.idVenta}">1</td>
+                <td th:text="${v.fecha}">2025-01-01</td>
+                <td th:text="${v.cliente?.nombre}">Cliente</td>
+                <td th:text="${v.empleado?.nombre}">Empleado</td>
+                <td th:text="${#lists.size(v.detalles)} + ' producto(s)'"></td>
+                <td>
+                    <a th:href="@{/ventas/ver/{id}(id=${v.idVenta})}">Ver</a>
+                    <a th:href="@{/ventas/eliminar/{id}(id=${v.idVenta})}"
+                       onclick="return confirm('¿Eliminar?')">Eliminar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(ventas)}">
+                <td colspan="6">No hay ventas registradas</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

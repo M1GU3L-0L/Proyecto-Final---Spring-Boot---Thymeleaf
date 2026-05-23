@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Productos - Veterinaria')}"></head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar}"></nav>
+    <div th:replace="~{fragments :: menu}"></div>
+
+    <hr/>
+
+    <h2>
+        <span th:text="${producto.idProducto == null} ? 'Nuevo producto' : 'Editar producto'"></span>
+    </h2>
+
+    <a th:href="@{/productos}">Volver</a>
+
+    <form method="post" th:action="@{/productos/guardar}" th:object="${producto}">
+        <input type="hidden" name="idProducto" th:value="*{idProducto}"/>
+
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" th:value="*{nombre}" required/>
+        </div>
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" th:value="*{precio}" step="0.01" required/>
+        </div>
+        <div>
+            <label for="existencias">Existencias:</label>
+            <input type="number" id="existencias" name="existencias" th:value="*{existencias}" required/>
+        </div>
+        <div>
+            <label for="categoria">Categoria:</label>
+            <select id="categoria" name="categoria.idCategoria">
+                <option value="">-- Seleccione --</option>
+                <option th:each="cat : ${categorias}"
+                        th:value="${cat.idCategoria}"
+                        th:text="${cat.nombre}"
+                        th:selected="${producto.categoria?.idCategoria == cat.idCategoria}">
+                </option>
+            </select>
+        </div>
+        <button type="submit">Guardar</button>
+        <a th:href="@{/productos}">Cancelar</a>
+    </form>
+
+</body>
+</html>
