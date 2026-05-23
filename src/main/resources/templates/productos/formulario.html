@@ -6,43 +6,52 @@
     <nav th:replace="~{fragments :: navbar}"></nav>
     <div th:replace="~{fragments :: menu}"></div>
 
-    <hr/>
+    <div class="container">
+        <h2>
+            <span th:text="${producto.idProducto == null} ? '📦 Nuevo producto' : '✏️ Editar producto'"></span>
+        </h2>
 
-    <h2>
-        <span th:text="${producto.idProducto == null} ? 'Nuevo producto' : 'Editar producto'"></span>
-    </h2>
+        <a th:href="@{/productos}" class="btn btn-secondary mb-2">← Volver</a>
 
-    <a th:href="@{/productos}">Volver</a>
+        <form method="post" th:action="@{/productos/guardar}" th:object="${producto}">
+            <input type="hidden" name="idProducto" th:value="*{idProducto}"/>
 
-    <form method="post" th:action="@{/productos/guardar}" th:object="${producto}">
-        <input type="hidden" name="idProducto" th:value="*{idProducto}"/>
+            <div>
+                <label for="nombre">Nombre del producto: *</label>
+                <input type="text" id="nombre" name="nombre" th:value="*{nombre}" 
+                       placeholder="Ej: Vacuna Antirrábica" required/>
+            </div>
 
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" th:value="*{nombre}" required/>
-        </div>
-        <div>
-            <label for="precio">Precio:</label>
-            <input type="number" id="precio" name="precio" th:value="*{precio}" step="0.01" required/>
-        </div>
-        <div>
-            <label for="existencias">Existencias:</label>
-            <input type="number" id="existencias" name="existencias" th:value="*{existencias}" required/>
-        </div>
-        <div>
-            <label for="categoria">Categoria:</label>
-            <select id="categoria" name="categoria.idCategoria">
-                <option value="">-- Seleccione --</option>
-                <option th:each="cat : ${categorias}"
-                        th:value="${cat.idCategoria}"
-                        th:text="${cat.nombre}"
-                        th:selected="${producto.categoria?.idCategoria == cat.idCategoria}">
-                </option>
-            </select>
-        </div>
-        <button type="submit">Guardar</button>
-        <a th:href="@{/productos}">Cancelar</a>
-    </form>
+            <div>
+                <label for="precio">Precio: *</label>
+                <input type="number" id="precio" name="precio" th:value="*{precio}" 
+                       step="0.01" min="0" placeholder="0.00" required/>
+            </div>
+
+            <div>
+                <label for="existencias">Existencias: *</label>
+                <input type="number" id="existencias" name="existencias" th:value="*{existencias}" 
+                       min="0" placeholder="0" required/>
+            </div>
+
+            <div>
+                <label for="categoria">Categoría: *</label>
+                <select id="categoria" name="categoria.idCategoria" required>
+                    <option value="">-- Seleccione una categoría --</option>
+                    <option th:each="cat : ${categorias}"
+                            th:value="${cat.idCategoria}"
+                            th:text="${cat.nombre}"
+                            th:selected="${producto.categoria?.idCategoria == cat.idCategoria}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="d-flex gap-1 mt-2">
+                <button type="submit" class="btn-primary">💾 Guardar</button>
+                <a th:href="@{/productos}" class="btn btn-secondary">❌ Cancelar</a>
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>

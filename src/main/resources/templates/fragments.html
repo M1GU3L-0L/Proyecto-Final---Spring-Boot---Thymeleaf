@@ -2,25 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/validation.js}" defer></script>
 </head>
 <body>
     <nav th:fragment="navbar">
         <a th:href="@{/}">Veterinaria</a>
         <span th:text="'Usuario: ' + ${#authentication.name}"></span>
-        <a th:href="@{/logout}">Cerrar sesion</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
     </nav>
 
-    <hr/>
-
-    <div th:fragment="menu">
-        <a th:href="@{/}">Inicio</a> |
-        <a th:href="@{/productos}">Productos</a> |
-        <a th:href="@{/categorias}">Categorias</a> |
-        <a th:href="@{/clientes}">Clientes</a> |
-        <a th:href="@{/empleados}">Empleados</a> |
-        <a th:href="@{/proveedores}">Proveedores</a> |
-        <a th:href="@{/ventas}">Ventas</a>
+    <div th:fragment="menu" class="menu-horizontal">
+        <a th:href="@{/}">🏠 Inicio</a>
+        <a th:href="@{/productos}">📦 Productos</a>
+        <a th:href="@{/categorias}">🏷️ Categorías</a>
+        <a th:href="@{/clientes}">👥 Clientes</a>
+        <a th:href="@{/empleados}">👨‍⚕️ Empleados</a>
+        <a th:href="@{/proveedores}">🚚 Proveedores</a>
+        <a th:href="@{/ventas}">💰 Ventas</a>
     </div>
 </body>
 </html>

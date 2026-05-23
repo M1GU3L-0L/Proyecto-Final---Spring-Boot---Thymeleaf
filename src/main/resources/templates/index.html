@@ -6,18 +6,21 @@
     <nav th:replace="~{fragments :: navbar}"></nav>
     <div th:replace="~{fragments :: menu}"></div>
 
-    <hr/>
+    <div class="container">
+        <h2 class="text-center">🏥 Panel Principal - Veterinaria</h2>
+        <p class="text-center" style="color: #6c757d; margin-bottom: 2rem;">
+            Sistema de gestión integral para clínicas veterinarias
+        </p>
 
-    <h2>Panel principal - Veterinaria</h2>
-
-    <ul>
-        <li><a th:href="@{/productos}">Gestionar Productos</a></li>
-        <li><a th:href="@{/categorias}">Gestionar Categorias</a></li>
-        <li><a th:href="@{/clientes}">Gestionar Clientes</a></li>
-        <li><a th:href="@{/empleados}">Gestionar Empleados</a></li>
-        <li><a th:href="@{/proveedores}">Gestionar Proveedores</a></li>
-        <li><a th:href="@{/ventas}">Gestionar Ventas</a></li>
-    </ul>
+        <ul style="max-width: 600px; margin: 0 auto;">
+            <li><a th:href="@{/productos}">📦 Gestionar Productos</a></li>
+            <li><a th:href="@{/categorias}">🏷️ Gestionar Categorías</a></li>
+            <li><a th:href="@{/clientes}">👥 Gestionar Clientes</a></li>
+            <li><a th:href="@{/empleados}">👨‍⚕️ Gestionar Empleados</a></li>
+            <li><a th:href="@{/proveedores}">🚚 Gestionar Proveedores</a></li>
+            <li><a th:href="@{/ventas}">💰 Gestionar Ventas</a></li>
+        </ul>
+    </div>
 
 </body>
 </html>

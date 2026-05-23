@@ -6,40 +6,42 @@
     <nav th:replace="~{fragments :: navbar}"></nav>
     <div th:replace="~{fragments :: menu}"></div>
 
-    <hr/>
+    <div class="container">
+        <div class="d-flex justify-between align-center mb-2">
+            <h2>📦 Productos</h2>
+            <a th:href="@{/productos/nuevo}" class="btn btn-primary">+ Nuevo producto</a>
+        </div>
 
-    <h2>Productos</h2>
-    <a th:href="@{/productos/nuevo}">+ Nuevo producto</a>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Existencias</th>
-                <th>Categoria</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="p : ${productos}">
-                <td th:text="${p.idProducto}">1</td>
-                <td th:text="${p.nombre}">Producto</td>
-                <td th:text="'$' + ${p.precio}">$0.00</td>
-                <td th:text="${p.existencias}">0</td>
-                <td th:text="${p.categoria?.nombre}">Categoria</td>
-                <td>
-                    <a th:href="@{/productos/editar/{id}(id=${p.idProducto})}">Editar</a>
-                    <a th:href="@{/productos/eliminar/{id}(id=${p.idProducto})}"
-                       onclick="return confirm('¿Eliminar?')">Eliminar</a>
-                </td>
-            </tr>
-            <tr th:if="${#lists.isEmpty(productos)}">
-                <td colspan="6">No hay productos registrados</td>
-            </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Existencias</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${productos}">
+                    <td th:text="${p.idProducto}">1</td>
+                    <td th:text="${p.nombre}">Producto</td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(p.precio, 1, 'COMMA', 2, 'POINT')}">$0.00</td>
+                    <td th:text="${p.existencias}">0</td>
+                    <td th:text="${p.categoria?.nombre}">Categoría</td>
+                    <td>
+                        <a th:href="@{/productos/editar/{id}(id=${p.idProducto})}">✏️ Editar</a>
+                        <a th:href="@{/productos/eliminar/{id}(id=${p.idProducto})}" 
+                           class="btn-danger">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(productos)}">
+                    <td colspan="6" class="text-center">No hay productos registrados</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
